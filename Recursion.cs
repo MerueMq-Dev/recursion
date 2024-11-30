@@ -31,15 +31,13 @@ namespace Recursion
 
         public static int GetListLength<T>(List<T> list)
         {
-            try
-            {
-                list.RemoveAt(0);
-                return 1 + GetListLength(list);
-            }
-            catch (Exception e)
+            if (list.Count == 0)
             {
                 return 0;
             }
+
+            list.RemoveAt(0);
+            return 1 + GetListLength(list);
         }
 
         public static bool IsPalindrome(string text)
