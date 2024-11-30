@@ -1,2 +1,3 @@
-﻿var sum =  Recursion.Recursion.SumOfDigits(-123);
-Console.WriteLine($"Sum of digits result: {sum}");
+﻿string stringForTesting = "heleH?";
+bool isPalindrome = Recursion.Recursion.IsPalindrome(stringForTesting);
+Console.WriteLine($" Текст \"{stringForTesting}\" {(isPalindrome ? "является" : "не является" )} палиндромом");
