@@ -43,19 +43,20 @@ namespace Recursion
         public static bool IsPalindrome(string text)
         {
             string lowerAlphanumericText = RemoveNonAlphanumericSymbols(text).ToLower();
-            switch (lowerAlphanumericText.Length)
-            {
-                case 0:
-                case 1:
-                    return true;
-                case 2:
-                    return lowerAlphanumericText[0] == lowerAlphanumericText[^1];
-                default:
-                    return lowerAlphanumericText[0] == lowerAlphanumericText[^1] &&
-                           IsPalindrome(lowerAlphanumericText.Substring(1,
-                               lowerAlphanumericText.Length - 2));
-            }
+            return IsTextPalindrome(lowerAlphanumericText, 0, lowerAlphanumericText.Length - 1);
         }
+
+        private static bool IsTextPalindrome(string text, int left, int right)
+        {
+            if (left >= right)
+                return true;
+            
+            if (text[left] != text[right])
+                return false;
+                
+            return IsTextPalindrome(text, left + 1, right - 1);
+        }
+
 
         private static string RemoveNonAlphanumericSymbols(string input)
         {
