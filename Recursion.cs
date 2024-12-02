@@ -46,17 +46,16 @@ namespace Recursion
             return IsTextPalindrome(lowerAlphanumericText, 0, lowerAlphanumericText.Length - 1);
         }
 
-        private static bool IsTextPalindrome(string text, int left, int right)
+        private static bool IsTextPalindrome(string text, int leftPointer, int rightPointer)
         {
-            if (left >= right)
+            if (leftPointer >= rightPointer)
                 return true;
-            
-            if (text[left] != text[right])
-                return false;
-                
-            return IsTextPalindrome(text, left + 1, right - 1);
-        }
 
+            if (text[leftPointer] != text[rightPointer])
+                return false;
+
+            return IsTextPalindrome(text, leftPointer + 1, rightPointer - 1);
+        }
 
         private static string RemoveNonAlphanumericSymbols(string input)
         {
@@ -71,6 +70,35 @@ namespace Recursion
             }
 
             return result.ToString();
+        }
+
+        public static void PrintEvenNumbers(List<int> numbers)
+        {
+            PrintEvenNumbersStartingAt(numbers, 0);
+        }
+
+        private static void PrintEvenNumbersStartingAt(List<int> numbers, int index)
+        {
+            if (index >= numbers.Count)
+                return;
+            if (numbers[index] % 2 == 0)
+                Console.WriteLine(numbers[index]);
+
+            PrintEvenNumbersStartingAt(numbers, index + 1);
+        }
+
+        public static void PrintEvenIndexValues<T>(List<T> values)
+        {
+            PrintEvenIndexValuesFrom(values, 0);
+        }
+
+        private static void PrintEvenIndexValuesFrom<T>(List<T> values, int index)
+        {
+            if (index >= values.Count)
+                return;
+            Console.WriteLine(values[index]);
+
+            PrintEvenIndexValuesFrom(values, index + 2);
         }
     }
 }
