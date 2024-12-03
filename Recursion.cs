@@ -1,9 +1,8 @@
-using System.Collections;
 using System.Text;
 
 namespace Recursion
 {
-    public class Recursion
+    public static class Recursion
     {
         public static int Power(int number, int power)
         {
@@ -108,26 +107,28 @@ namespace Recursion
             
             return FindSecondLargestNumber(numbers, int.MinValue, int.MinValue, 0);
         }
-        private static int FindSecondLargestNumber(List<int> numbers, int largest, int secondLargest, int index)
+        private static int FindSecondLargestNumber(List<int> numbers, int largestNumber, 
+            int secondLargestNumber, int index)
         {
             if (index == numbers.Count)
             {
-                return secondLargest;
+                return secondLargestNumber;
             }
 
             int currentNumber = numbers[index];
-
-            if (largest <= currentNumber)
-            {
-                return FindSecondLargestNumber(numbers, currentNumber, largest, index + 1);
-            }
+            int newLargestNumber = largestNumber;
+            int newSecondLargestNumber = secondLargestNumber;
             
-            if (secondLargest < currentNumber)
+            if (largestNumber <= currentNumber)
             {
-                return FindSecondLargestNumber(numbers, largest,currentNumber, index + 1);
+                newSecondLargestNumber = largestNumber;
+                newLargestNumber = currentNumber;
+            } else if (secondLargestNumber < currentNumber)
+            {
+                newSecondLargestNumber= currentNumber;
             }
 
-            return FindSecondLargestNumber(numbers, largest, secondLargest, index + 1);
+            return FindSecondLargestNumber(numbers, newLargestNumber, newSecondLargestNumber, index + 1);
         }
     }
 }
