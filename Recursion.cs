@@ -106,9 +106,9 @@ namespace Recursion
             if (numbers.Count < 2 || numbers == null)
                 throw new ArgumentException("The list must contain at least 2 elements");
             
-            return GetSecondLargest(numbers, int.MinValue, int.MinValue, 0);
+            return FindSecondLargestNumber(numbers, int.MinValue, int.MinValue, 0);
         }
-        private static int GetSecondLargest(List<int> numbers, int largest, int secondLargest, int index)
+        private static int FindSecondLargestNumber(List<int> numbers, int largest, int secondLargest, int index)
         {
             if (index == numbers.Count)
             {
@@ -119,15 +119,15 @@ namespace Recursion
 
             if (largest <= currentNumber)
             {
-                return GetSecondLargest(numbers, currentNumber, largest, index + 1);
+                return FindSecondLargestNumber(numbers, currentNumber, largest, index + 1);
             }
             
             if (secondLargest < currentNumber)
             {
-                return GetSecondLargest(numbers, largest,currentNumber, index + 1);
+                return FindSecondLargestNumber(numbers, largest,currentNumber, index + 1);
             }
 
-            return GetSecondLargest(numbers, largest, secondLargest, index + 1);
+            return FindSecondLargestNumber(numbers, largest, secondLargest, index + 1);
         }
     }
 }
