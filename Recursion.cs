@@ -100,5 +100,34 @@ namespace Recursion
 
             PrintEvenIndexValuesFrom(values, index + 2);
         }
+
+        public static int GetSecondLargestNumber(List<int> numbers)
+        {
+            if (numbers.Count < 2 || numbers == null)
+                throw new ArgumentException("The list must contain at least 2 elements");
+            
+            return GetSecondLargest(numbers, int.MinValue, int.MinValue, 0);
+        }
+        private static int GetSecondLargest(List<int> numbers, int largest, int secondLargest, int index)
+        {
+            if (index == numbers.Count)
+            {
+                return secondLargest;
+            }
+
+            int currentNumber = numbers[index];
+
+            if (largest <= currentNumber)
+            {
+                return GetSecondLargest(numbers, currentNumber, largest, index + 1);
+            }
+            
+            if (secondLargest < currentNumber)
+            {
+                return GetSecondLargest(numbers, largest,currentNumber, index + 1);
+            }
+
+            return GetSecondLargest(numbers, largest, secondLargest, index + 1);
+        }
     }
 }
