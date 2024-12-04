@@ -104,10 +104,11 @@ namespace Recursion
         {
             if (numbers.Count < 2 || numbers == null)
                 throw new ArgumentException("The list must contain at least 2 elements");
-            
+
             return FindSecondLargestNumber(numbers, int.MinValue, int.MinValue, 0);
         }
-        private static int FindSecondLargestNumber(List<int> numbers, int largestNumber, 
+
+        private static int FindSecondLargestNumber(List<int> numbers, int largestNumber,
             int secondLargestNumber, int index)
         {
             if (index == numbers.Count)
@@ -118,17 +119,41 @@ namespace Recursion
             int currentNumber = numbers[index];
             int newLargestNumber = largestNumber;
             int newSecondLargestNumber = secondLargestNumber;
-            
+
             if (largestNumber <= currentNumber)
             {
                 newSecondLargestNumber = largestNumber;
                 newLargestNumber = currentNumber;
-            } else if (secondLargestNumber < currentNumber)
+            }
+            else if (secondLargestNumber < currentNumber)
             {
-                newSecondLargestNumber= currentNumber;
+                newSecondLargestNumber = currentNumber;
             }
 
             return FindSecondLargestNumber(numbers, newLargestNumber, newSecondLargestNumber, index + 1);
+        }
+
+        public static List<string> GetAllFiles(string path)
+        {
+            List<string> directories = [path];
+            return GetFiles(directories, []);
+        }
+
+        private static List<string> GetFiles(List<string> directories, List<string> files)
+        {
+            if (directories.Count == 0)
+                return files;
+
+            string currentDirectory = directories[0];
+            directories.Remove(currentDirectory);
+            
+            string[] currentFiles = Directory.GetFiles(currentDirectory);
+            string[] currentDirectories = Directory.GetDirectories(currentDirectory);
+            
+            files.AddRange(currentFiles);
+            directories.AddRange(currentDirectories);
+
+            return GetFiles(directories, files);
         }
     }
 }
