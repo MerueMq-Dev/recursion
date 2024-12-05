@@ -3,7 +3,7 @@
 // Console.WriteLine($" Текст \"{stringForTesting}\" {(isPalindrome ? "является" : "не является" )} палиндромом");
 
 List<string> filesNames = Recursion.Recursion
-    .GetAllFiles(@"C:\Users\Natali\Downloads\images_и_не_только");
+    .GetAllFilesRecursive(@"C:\Users\Natali\Downloads\images_и_не_только");
 
 foreach (var filesName in filesNames)
 {

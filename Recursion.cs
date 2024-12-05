@@ -132,7 +132,7 @@ namespace Recursion
 
             return FindSecondLargestNumber(numbers, newLargestNumber, newSecondLargestNumber, index + 1);
         }
-
+        
         public static List<string> GetAllFiles(string path)
         {
             List<string> directories = [path];
@@ -153,6 +153,23 @@ namespace Recursion
             directories.AddRange(currentDirectories);
 
             return GetFiles(directories, files, index + 1);
+        }
+        
+        public static List<string> GetAllFilesRecursive(string path)
+        {
+         
+            List<string> currentFiles = Directory.GetFiles(path).ToList();
+            string[] currentDirectories = Directory.GetDirectories(path);
+
+            if (currentDirectories.Length == 0)
+                return currentFiles;
+
+            foreach (var directory in currentDirectories)
+            {
+                currentFiles.AddRange(GetAllFilesRecursive(directory));
+            }
+
+            return currentFiles;
         }
     }
 }
