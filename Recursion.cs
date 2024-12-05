@@ -136,16 +136,15 @@ namespace Recursion
         public static List<string> GetAllFiles(string path)
         {
             List<string> directories = [path];
-            return GetFiles(directories, []);
+            return GetFiles(directories, [], 0);
         }
 
-        private static List<string> GetFiles(List<string> directories, List<string> files)
+        private static List<string> GetFiles(List<string> directories, List<string> files, int index)
         {
-            if (directories.Count == 0)
+            if (directories.Count == index)
                 return files;
 
-            string currentDirectory = directories[0];
-            directories.Remove(currentDirectory);
+            string currentDirectory = directories[index];
             
             string[] currentFiles = Directory.GetFiles(currentDirectory);
             string[] currentDirectories = Directory.GetDirectories(currentDirectory);
@@ -153,7 +152,7 @@ namespace Recursion
             files.AddRange(currentFiles);
             directories.AddRange(currentDirectories);
 
-            return GetFiles(directories, files);
+            return GetFiles(directories, files, index + 1);
         }
     }
 }
