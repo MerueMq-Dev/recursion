@@ -2,12 +2,18 @@
 // bool isPalindrome = Recursion.Recursion.IsPalindrome(stringForTesting);
 // Console.WriteLine($" Текст \"{stringForTesting}\" {(isPalindrome ? "является" : "не является" )} палиндромом");
 
-List<string> filesNames = Recursion.Recursion
-    .GetAllFilesRecursive(@"C:\Users\Natali\Downloads\images_и_не_только");
+// List<string> filesNames = Recursion.Recursion
+//     .GetAllFilesRecursive(@"C:\Users\");
+//
+// foreach (var filesName in filesNames)
+// {
+//     Console.WriteLine($"Имя файла: {filesName}");
+// }
+// Console.WriteLine($"Количество файлов: {filesNames.Count}");
 
-foreach (var filesName in filesNames)
+List<string> generatedParentheses = Recursion.Recursion.GenerateParentheses(3);
+
+foreach (var parentheses in generatedParentheses)
 {
-    Console.WriteLine($"Имя файла: {filesName}");
+    Console.WriteLine(parentheses);
 }
-
-Console.WriteLine($"Количество файлов: {filesNames.Count}");

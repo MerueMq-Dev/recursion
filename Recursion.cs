@@ -108,7 +108,8 @@ namespace Recursion
             return FindSecondLargestNumber(numbers, int.MinValue, int.MinValue, 0);
         }
 
-        private static int FindSecondLargestNumber(List<int> numbers, int largestNumber,
+        private static int FindSecondLargestNumber(List<int> numbers,
+            int largestNumber,
             int secondLargestNumber, int index)
         {
             if (index == numbers.Count)
@@ -132,7 +133,7 @@ namespace Recursion
 
             return FindSecondLargestNumber(numbers, newLargestNumber, newSecondLargestNumber, index + 1);
         }
-        
+
         public static List<string> GetAllFiles(string path)
         {
             List<string> directories = [path];
@@ -145,19 +146,18 @@ namespace Recursion
                 return files;
 
             string currentDirectory = directories[index];
-            
+
             string[] currentFiles = Directory.GetFiles(currentDirectory);
             string[] currentDirectories = Directory.GetDirectories(currentDirectory);
-            
+
             files.AddRange(currentFiles);
             directories.AddRange(currentDirectories);
 
             return GetFiles(directories, files, index + 1);
         }
-        
+
         public static List<string> GetAllFilesRecursive(string path)
         {
-         
             List<string> currentFiles = Directory.GetFiles(path).ToList();
             string[] currentDirectories = Directory.GetDirectories(path);
 
@@ -170,6 +170,45 @@ namespace Recursion
             }
 
             return currentFiles;
+        }
+
+        public static List<string> GenerateParentheses(int openParentheses)
+        {
+            return GenerateParentheses("", 0, 0, openParentheses);
+        }
+
+        private static List<string> GenerateParentheses(
+            string currentParentheses,
+            int openParenthesesCount,
+            int closeParenthesesCount,
+            int openParenthesesGoal
+        )
+        {
+            List<string> validSequences = [];
+            if (currentParentheses.Length == openParenthesesGoal * 2)
+            {
+                validSequences.Add(currentParentheses);
+            }
+
+            if (openParenthesesCount < openParenthesesGoal)
+            {
+                List<string> generatedParentheses = GenerateParentheses(currentParentheses + "(",
+                    openParenthesesCount + 1,
+                    closeParenthesesCount, openParenthesesGoal);
+
+                validSequences.AddRange(generatedParentheses);
+            }
+
+            if (openParenthesesCount > closeParenthesesCount)
+            {
+                List<string> generatedParentheses = GenerateParentheses(currentParentheses + ")",
+                    openParenthesesCount,
+                    closeParenthesesCount + 1, openParenthesesGoal);
+
+                validSequences.AddRange(generatedParentheses);
+            }
+
+            return validSequences;
         }
     }
 }
